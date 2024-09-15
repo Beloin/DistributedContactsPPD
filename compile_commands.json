@@ -1,0 +1,68 @@
+[
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/beloin/Documents/distributed_contact_book/build/contacts_app_autogen/include -I/home/beloin/Documents/distributed_contact_book/contacts/../network -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtWidgets -fPIC -o CMakeFiles/contacts_app.dir/contacts_app_autogen/mocs_compilation.cpp.o -c /home/beloin/Documents/distributed_contact_book/build/contacts_app_autogen/mocs_compilation.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/build/contacts_app_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/contacts_app.dir/contacts_app_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/beloin/Documents/distributed_contact_book/build/contacts_app_autogen/include -I/home/beloin/Documents/distributed_contact_book/contacts/../network -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtWidgets -fPIC -o CMakeFiles/contacts_app.dir/main.cpp.o -c /home/beloin/Documents/distributed_contact_book/main.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/main.cpp",
+  "output": "CMakeFiles/contacts_app.dir/main.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/beloin/Documents/distributed_contact_book/build/contacts_app_autogen/include -I/home/beloin/Documents/distributed_contact_book/contacts/../network -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtWidgets -fPIC -o CMakeFiles/contacts_app.dir/ApplicationMain.cpp.o -c /home/beloin/Documents/distributed_contact_book/ApplicationMain.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/ApplicationMain.cpp",
+  "output": "CMakeFiles/contacts_app.dir/ApplicationMain.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/ui",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/beloin/Documents/distributed_contact_book/build/ui/ui_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtWidgets -fPIC -o CMakeFiles/ui.dir/ui_autogen/mocs_compilation.cpp.o -c /home/beloin/Documents/distributed_contact_book/build/ui/ui_autogen/mocs_compilation.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/build/ui/ui_autogen/mocs_compilation.cpp",
+  "output": "ui/CMakeFiles/ui.dir/ui_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/network",
+  "command": "/usr/bin/c++  -I/home/beloin/Documents/distributed_contact_book/build/network/network_lib_autogen/include  -o CMakeFiles/network_lib.dir/network_lib_autogen/mocs_compilation.cpp.o -c /home/beloin/Documents/distributed_contact_book/build/network/network_lib_autogen/mocs_compilation.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/build/network/network_lib_autogen/mocs_compilation.cpp",
+  "output": "network/CMakeFiles/network_lib.dir/network_lib_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/network",
+  "command": "/usr/bin/c++  -I/home/beloin/Documents/distributed_contact_book/build/network/network_lib_autogen/include  -o CMakeFiles/network_lib.dir/server.cpp.o -c /home/beloin/Documents/distributed_contact_book/network/server.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/network/server.cpp",
+  "output": "network/CMakeFiles/network_lib.dir/server.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/network",
+  "command": "/usr/bin/c++  -I/home/beloin/Documents/distributed_contact_book/build/network/network_lib_autogen/include  -o CMakeFiles/network_lib.dir/client.cpp.o -c /home/beloin/Documents/distributed_contact_book/network/client.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/network/client.cpp",
+  "output": "network/CMakeFiles/network_lib.dir/client.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/network",
+  "command": "/usr/bin/c++  -I/home/beloin/Documents/distributed_contact_book/build/network/network_lib_autogen/include  -o CMakeFiles/network_lib.dir/socket_utils.cpp.o -c /home/beloin/Documents/distributed_contact_book/network/socket_utils.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/network/socket_utils.cpp",
+  "output": "network/CMakeFiles/network_lib.dir/socket_utils.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/utils",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/beloin/Documents/distributed_contact_book/build/utils/utils_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtWidgets -fPIC -o CMakeFiles/utils.dir/utils_autogen/mocs_compilation.cpp.o -c /home/beloin/Documents/distributed_contact_book/build/utils/utils_autogen/mocs_compilation.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/build/utils/utils_autogen/mocs_compilation.cpp",
+  "output": "utils/CMakeFiles/utils.dir/utils_autogen/mocs_compilation.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/utils",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/beloin/Documents/distributed_contact_book/build/utils/utils_autogen/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtWidgets -fPIC -o CMakeFiles/utils.dir/split.cpp.o -c /home/beloin/Documents/distributed_contact_book/utils/split.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/utils/split.cpp",
+  "output": "utils/CMakeFiles/utils.dir/split.cpp.o"
+},
+{
+  "directory": "/home/beloin/Documents/distributed_contact_book/build/contacts",
+  "command": "/usr/bin/c++  -I/home/beloin/Documents/distributed_contact_book/build/contacts/libcontact_autogen/include -I/home/beloin/Documents/distributed_contact_book/contacts/../network  -o CMakeFiles/libcontact.dir/libcontact_autogen/mocs_compilation.cpp.o -c /home/beloin/Documents/distributed_contact_book/build/contacts/libcontact_autogen/mocs_compilation.cpp",
+  "file": "/home/beloin/Documents/distributed_contact_book/build/contacts/libcontact_autogen/mocs_compilation.cpp",
+  "output": "contacts/CMakeFiles/libcontact.dir/libcontact_autogen/mocs_compilation.cpp.o"
+}
+]

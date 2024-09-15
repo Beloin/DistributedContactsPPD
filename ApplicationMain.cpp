@@ -1,5 +1,4 @@
 #include "ApplicationMain.h"
-#include "ui/QTContacts.hpp"
 #include <QBoxLayout>
 #include <QDialogButtonBox>
 #include <QDir>
@@ -18,7 +17,7 @@ ApplicationMain::ApplicationMain(QWidget *parent) : QMainWindow(parent) {
   setLayoutDirection(Qt::RightToLeft);
   auto scene = new QGraphicsScene{this};
   auto button = new QPushButton("Connect");
-  connect(button, &QPushButton::released, this, &ApplicationMain::handle);
+  connect(button, &QPushButton::released, this, &ApplicationMain::handleConnection);
 
   auto mainWidget = new QWidget();
   auto hbox = new QHBoxLayout();
@@ -28,23 +27,14 @@ ApplicationMain::ApplicationMain(QWidget *parent) : QMainWindow(parent) {
   vbox->addItem(hbox);
 
   auto mainHorizontalBox = new QHBoxLayout();
-  // TODO: Create a way to change chats when clicked in contacts ->
-  // onContactClick
-  pChat = new Ui::QTChat();
-  pContacts = new Ui::QTContacts();
-  mainHorizontalBox->addItem(pChat);
-  mainHorizontalBox->addItem(pContacts);
   mainHorizontalBox->addItem(vbox);
 
   mainWidget->setLayout(mainHorizontalBox);
   setCentralWidget(mainWidget);
 }
-void ApplicationMain::handle() {
+void ApplicationMain::handleConnection() {
   auto ok2 = connectionDialog();
   if (ok2) {
-    _serverCon.ConnectTo(serverAddress, "22222");
-    clientListen = std::thread{&ApplicationMain::listen, this};
-    clientListen.detach();
   }
 }
 
@@ -77,7 +67,6 @@ bool ApplicationMain::connectionDialog() {
   return false;
 }
 
-void ApplicationMain::OnMessage(std::string message) {}
 void ApplicationMain::listen()
 {
 
