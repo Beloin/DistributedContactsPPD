@@ -27,9 +27,9 @@ Projeto que visa criar uma lista de contatos distribuida, ou seja, replicada em 
 - Parece que o professor quer um _nameserver_... Posso usar um e direcionar os dados para ele... Posso também usar o próprio nameserver do linux?
   - De inicio iremos usar o servidor nativo de hosts do Linux, depois podemos usar um servidor central para ser como um "service discovery", ou "Service Regsitry. Ver [link](https://fullcycle.com.br/entenda-como-funciona-o-service-discovery/).
   - Para isso, adicionaremos:
-      - `sudo bash -c 'echo "127.0.0.1 contact-server1" >> /etc/hosts'`
-      - `sudo bash -c 'echo "127.0.0.1 contact-server2" >> /etc/hosts'`
-      - `sudo bash -c 'echo "127.0.0.1 contact-server3" >> /etc/hosts'`
+      - `sudo bash -c 'echo "127.0.0.1 contact-server-1" >> /etc/hosts'`
+      - `sudo bash -c 'echo "127.0.0.1 contact-server-2" >> /etc/hosts'`
+      - `sudo bash -c 'echo "127.0.0.1 contact-server-3" >> /etc/hosts'`
 
 1. O cliente deve conhecer um dos três servidores, ao conectar-se nele, receberá os endereços de outros possíveis servidores, caso esse venha a cair.
     - 1.1. Esse caso poderia também ser solucionado de forma melhor usando um _nameserver_. Um servidor que redirecionaria os clientes para os servidores "vivos".
