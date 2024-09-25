@@ -1,4 +1,5 @@
 #include "ApplicationMain.h"
+#include "network/know_servers.h"
 #include <QBoxLayout>
 #include <QDialogButtonBox>
 #include <QDir>
@@ -33,6 +34,7 @@ ApplicationMain::ApplicationMain(QWidget *parent) : QMainWindow(parent) {
   setCentralWidget(mainWidget);
 }
 void ApplicationMain::handleConnection() {
+  // TODO: Auto connect to the list of know servers...
   auto ok2 = connectionDialog();
   if (ok2) {
   }
@@ -55,6 +57,7 @@ bool ApplicationMain::connectionDialog() {
   QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
   QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
 
+  knowServers;
   if (dialog.exec() == QDialog::Accepted) {
     if (serverAddressField->text().isEmpty()) {
       return false;
