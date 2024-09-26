@@ -85,6 +85,10 @@ ssize_t Network::Client::internalSendBytes(std::string const &value,
   return Utils::sbytes(server_fd, (unsigned char *)value.c_str(), size);
 }
 
+ssize_t Network::Client::internalSendBytes(char *value, size_t size) {
+  return Utils::sbytes(server_fd, (unsigned char *)value, size);
+}
+
 ssize_t Network::Client::internalReadBytes(unsigned char *buf, size_t n) {
   return Utils::rbytes(server_fd, buf, n);
 }

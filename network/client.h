@@ -18,6 +18,7 @@ protected:
   std::string server_addr;
 
   ssize_t internalSendBytes(std::string const &value, size_t size);
+  ssize_t internalSendBytes(char *buffer, size_t size);
   ssize_t internalReadBytes(unsigned char *buf, size_t n);
 
 private:

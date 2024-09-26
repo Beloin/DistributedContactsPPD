@@ -6,22 +6,34 @@
 #define UI_CONTACTS_H
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "ContactsService.hpp"
+#include <QLineEdit>
+#include <QListWidget>
+#include <QVBoxLayout>
+
 namespace Ui {
 
 //------------------------------------------------------------------------------
 
-class QTContacts
-{
+class QTContacts : public QVBoxLayout {
 
 public:
-    QTContacts() = default;
-    ~QTContacts() = default; 
+  QTContacts(Contacts::ContactsService &service);
+  ~QTContacts();
+
+  QListWidget *listView;
+  std::string contactName;
 
 private:
+  QLineEdit *nameEdit;
+  QLineEdit *numberEdit;
 
+  Contacts::ContactsService &service;
+
+  void addContact();
 };
 
 //------------------------------------------------------------------------------
 
-}
+} // namespace Ui
 #endif /* UI_CONTACTS_H */

@@ -1,5 +1,6 @@
 #include "ApplicationMain.h"
 #include "network/know_servers.h"
+#include "ui/QTContacts.hpp"
 #include <QBoxLayout>
 #include <QDialogButtonBox>
 #include <QDir>
@@ -11,6 +12,8 @@
 #include <QListWidgetItem>
 #include <QMessageBox>
 #include <QPushButton>
+#include <qicon.h>
+#include <qsize.h>
 
 ApplicationMain::ApplicationMain(QWidget *parent) : QMainWindow(parent) {
   // setFixedSize(1200, 800);
@@ -18,14 +21,25 @@ ApplicationMain::ApplicationMain(QWidget *parent) : QMainWindow(parent) {
   setLayoutDirection(Qt::RightToLeft);
   auto scene = new QGraphicsScene{this};
   auto button = new QPushButton("Connect");
-  connect(button, &QPushButton::released, this, &ApplicationMain::handleConnection);
+
+  auto refreshButton = new QPushButton("Refresh");
+  // button->setFixedSize(QSize{100, 25});
+  connect(button, &QPushButton::released, this,
+          &ApplicationMain::handleConnection);
+
+  connectionStatus = new QLabel("Disconnected");
 
   auto mainWidget = new QWidget();
   auto hbox = new QHBoxLayout();
   hbox->addWidget(button);
 
+  // Only show after connection
+  // hbox->addWidget(refreshButton);
+
+  pContacts = new Ui::QTContacts(service);
   auto vbox = new QVBoxLayout();
   vbox->addItem(hbox);
+  vbox->addItem(pContacts);
 
   auto mainHorizontalBox = new QHBoxLayout();
   mainHorizontalBox->addItem(vbox);
@@ -35,43 +49,6 @@ ApplicationMain::ApplicationMain(QWidget *parent) : QMainWindow(parent) {
 }
 void ApplicationMain::handleConnection() {
   // TODO: Auto connect to the list of know servers...
-  auto ok2 = connectionDialog();
-  if (ok2) {
-  }
-}
-
-bool ApplicationMain::connectionDialog() {
-  QDialog dialog(this);
-  QFormLayout form(&dialog);
-
-  form.addRow(new QLabel("End. do Servidor:"));
-
-  auto *serverAddressField = new QLineEdit(&dialog);
-  serverAddressField->setText("localhost");
-  form.addRow(serverAddressField);
-
-  QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                             Qt::Horizontal, &dialog);
-  form.addRow(&buttonBox);
-
-  QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
-  QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
-
-  knowServers;
-  if (dialog.exec() == QDialog::Accepted) {
-    if (serverAddressField->text().isEmpty()) {
-      return false;
-    }
-
-    serverAddress = serverAddressField->text().toStdString();
-    return true;
-  }
-
-  return false;
-}
-
-void ApplicationMain::listen()
-{
-
+  service.connect();
 }
 
