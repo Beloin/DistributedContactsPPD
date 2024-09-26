@@ -12,24 +12,28 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 #include <QMainWindow>
-#include <thread>
+#include <qlayout.h>
 
 class ApplicationMain : public QMainWindow {
 
 private:
   Ui::QTContacts *pContacts;
-  Contacts::ContactsService service;
-  QLabel *connectionStatus;
+  // TODO: Add callback to
+  Contacts::ContactsService *service;
 
   std::string clientName{"Username"};
 
-  std::string serverAddress;
-  std::thread clientListen;
+  QLabel *connectionStatus;
+
+  bool connectionDialog();
 
 public:
   explicit ApplicationMain(QWidget *parent = Q_NULLPTR);
 
   void handleConnection();
+  void refresh();
+  void onStatusUpdate(std::string &status);
+  // void listen();
 };
 
 #endif // TEST_QT5_APPLICATIONMAIN_H

@@ -2,6 +2,8 @@ add_library(
         ui STATIC
         QTContacts.hpp
         QTContacts.cpp
+
+        QTContactItem.hpp
 )
 
 target_link_libraries(ui

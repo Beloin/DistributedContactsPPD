@@ -4,6 +4,7 @@
 #include "know_servers.h"
 #include <cstdint>
 #include <iostream>
+#include <sstream>
 
 using namespace Contacts;
 
@@ -12,7 +13,10 @@ bool ContactsService::connect() {
   if (onceConnected) {
     // TODO: catch close?
     disconnect();
-    // TODO: Status change
+    std::stringstream strstream;
+    strstream << "Lost connection to " << lastServer;
+    auto status = strstream.str();
+    callback(status);
   }
 
   bool connected{false};
@@ -26,7 +30,11 @@ bool ContactsService::connect() {
       std::cout << "Could not connect to " << host << std::endl;
       continue;
     } else {
-      std::cout << "Connected to " << host << std::endl;
+      std::stringstream strstream;
+      strstream << "Connected to " << host;
+      auto status = strstream.str();
+      std::cout << status << std::endl;
+      callback(status);
       if (lastServer == "")
         lastServer = host;
       else
@@ -115,6 +123,10 @@ const bool ContactsService::createContact(std::string name,
 }
 
 bool ContactsService::refresh() {
+  if (!IsConnected()) {
+    return false;
+  }
+
   char buffer[256];
   buffer[0] = 3;
   int wrote = internalSendBytes(buffer, 1);
@@ -125,17 +137,18 @@ bool ContactsService::refresh() {
   }
 
   int read = internalReadBytes((unsigned char *)buffer, 4);
-  if (wrote == 0) {
+  if (read == 0) {
     std::cout << "Lost connection to " << currentServer << std::endl;
     connect();
     return false;
   }
   uint32_t v = convert4(buffer);
   internalContacts.resize(v);
+  if (v == 0) return true;
 
-  for (size_t i = 0 - 1; i >= v; i--) {
+  for (size_t i = 0; i < v; i++) {
     read = internalReadBytes((unsigned char *)buffer, 256);
-    if (wrote == 0) {
+    if (read == 0) {
       std::cout << "Lost connection to " << currentServer << std::endl;
       connect();
       return false;
@@ -143,7 +156,7 @@ bool ContactsService::refresh() {
     std::string name = parseNullTerminatedString(buffer);
 
     read = internalReadBytes((unsigned char *)buffer, 20);
-    if (wrote == 0) {
+    if (read == 0) {
       std::cout << "Lost connection to " << currentServer << std::endl;
       connect();
       return false;

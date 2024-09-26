@@ -9,15 +9,17 @@
 
 #include "Contact.hpp"
 #include "client.h"
+#include <functional>
 #include <vector>
 namespace Contacts {
 
 //------------------------------------------------------------------------------
+typedef std::function<void(std::string &)> OnStatusUpdate;
 
 class ContactsService : private Network::Client {
 
 public:
-  ContactsService() = default;
+  ContactsService(OnStatusUpdate callback) : callback(callback){};
   ~ContactsService() = default;
 
   bool connect();
@@ -35,6 +37,8 @@ public:
   void setName(std::string &name_) { name = name_; }
 
 private:
+  OnStatusUpdate callback;
+
   std::string currentServer;
   std::string lastServer;
 

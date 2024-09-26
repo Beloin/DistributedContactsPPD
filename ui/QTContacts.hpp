@@ -24,6 +24,8 @@ public:
   QListWidget *listView;
   std::string contactName;
 
+  void refresh();
+
 private:
   QLineEdit *nameEdit;
   QLineEdit *numberEdit;
@@ -31,6 +33,11 @@ private:
   Contacts::ContactsService &service;
 
   void addContact();
+
+  void addInnerContact(std::string &name, std::string number);
+
+  void onContactClick(QListWidgetItem *item);
+  bool showContactDialog(Contacts::Contact &contact);
 };
 
 //------------------------------------------------------------------------------
