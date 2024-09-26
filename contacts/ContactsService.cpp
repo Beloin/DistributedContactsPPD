@@ -9,9 +9,7 @@
 using namespace Contacts;
 
 bool ContactsService::connect() {
-  // TODO: callback to status change
   if (onceConnected) {
-    // TODO: catch close?
     disconnect();
     std::stringstream strstream;
     strstream << "Lost connection to " << lastServer;
@@ -144,7 +142,8 @@ bool ContactsService::refresh() {
   }
   uint32_t v = convert4(buffer);
   internalContacts.resize(v);
-  if (v == 0) return true;
+  if (v == 0)
+    return true;
 
   for (size_t i = 0; i < v; i++) {
     read = internalReadBytes((unsigned char *)buffer, 256);
@@ -169,7 +168,24 @@ bool ContactsService::refresh() {
   return true;
 }
 
-bool ContactsService::removeContact(std::string name) {
-  // TODO: Implement delete
+bool ContactsService::removeContact(std::string &name) {
+  char buffer[256];
+  buffer[0] = 2;
+  int wrote = internalSendBytes(buffer, 1);
+  if (wrote == 0) {
+    std::cout << "Lost connection to " << currentServer << std::endl;
+    connect();
+    return false;
+  }
+
+  createPaddedString(buffer, name);
+  wrote = internalSendBytes(buffer, 256);
+  if (wrote == 0) {
+    std::cout << "Lost connection to " << currentServer << std::endl;
+    connect();
+
+    return false;
+  }
+
   return true;
 }

@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <iostream>
 #include <qchar.h>
+#include <qdialog.h>
 #include <qdialogbuttonbox.h>
 #include <qformlayout.h>
 #include <sstream>
@@ -18,9 +19,8 @@ using namespace Ui;
 
 QTContacts::QTContacts(Contacts::ContactsService &service) : service(service) {
   listView = new QListWidget();
-  // TODO: Add double click to open a context window?
   connect(listView, &QListWidget::itemDoubleClicked, this,
-          &QTContacts::onContactClick);
+          &QTContacts::openDialogMenu);
 
   auto *itemO1 = new QListWidgetItem("Add contact Name");
   itemO1->setBackground(Qt::lightGray);
@@ -90,13 +90,27 @@ void QTContacts::addInnerContact(std::string &name, std::string number) {
   listView->addItem(message);
 }
 
-void QTContacts::onContactClick(QListWidgetItem *item) {
+void QTContacts::showUpdateDialog(QListWidgetItem *item) {
   auto realItem = (QTContactItem *)item;
   auto &contact = realItem->internalContact;
-  showContactDialog(contact);
+  auto shouldUpdate = showContactUpdateDialog(contact);
+  if (shouldUpdate) {
+    service.createContact(contact.name, newNumber);
+    refresh();
+  }
 }
 
-bool QTContacts::showContactDialog(Contacts::Contact &contact) {
+void QTContacts::showDeleteDialog(QListWidgetItem *item) {
+  auto realItem = (QTContactItem *)item;
+  auto &contact = realItem->internalContact;
+  auto shouldDelete = showContactDeleteDialog(contact);
+  if (shouldDelete) {
+    service.removeContact(contact.name);
+    refresh();
+  }
+}
+
+bool QTContacts::showContactUpdateDialog(Contacts::Contact &contact) {
   QDialog dialog{};
   QFormLayout form(&dialog);
 
@@ -120,8 +134,50 @@ bool QTContacts::showContactDialog(Contacts::Contact &contact) {
       return false;
     }
 
+    newNumber = newNumberField->text().toStdString();
+
     return true;
   }
 
   return false;
+}
+
+bool QTContacts::showContactDeleteDialog(Contacts::Contact &contact) {
+  QDialog dialog{};
+  QFormLayout form(&dialog);
+
+  std::stringstream ss;
+  ss << "You sure you want to delete " << contact.name;
+  form.addRow(new QLabel(QString::fromStdString(ss.str())));
+
+  QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+                             Qt::Horizontal, &dialog);
+  form.addRow(&buttonBox);
+
+  QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+  QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+
+  return dialog.exec() == QDialog::Accepted;
+}
+
+void QTContacts::openDialogMenu(QListWidgetItem *item) {
+  QDialog dialog{};
+  QFormLayout form(&dialog);
+  QDialogButtonBox buttonBox(Qt::Horizontal, &dialog);
+  auto updateButton = QPushButton{"Update"};
+  auto deleteButton = QPushButton{"Delete"};
+  buttonBox.addButton(&updateButton, QDialogButtonBox::AcceptRole);
+  buttonBox.addButton(&deleteButton, QDialogButtonBox::RejectRole);
+  form.addRow(&buttonBox);
+
+  QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+  QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+
+  auto which = dialog.exec() == QDialog::Accepted;
+
+  if (which) {
+    showUpdateDialog(item);
+  } else {
+    showDeleteDialog(item);
+  }
 }

@@ -30,14 +30,19 @@ private:
   QLineEdit *nameEdit;
   QLineEdit *numberEdit;
 
+  std::string newNumber;
+
   Contacts::ContactsService &service;
 
   void addContact();
 
   void addInnerContact(std::string &name, std::string number);
 
-  void onContactClick(QListWidgetItem *item);
-  bool showContactDialog(Contacts::Contact &contact);
+  void openDialogMenu(QListWidgetItem *item);
+  void showUpdateDialog(QListWidgetItem *item);
+  void showDeleteDialog(QListWidgetItem *item);
+  bool showContactUpdateDialog(Contacts::Contact &contact);
+  bool showContactDeleteDialog(Contacts::Contact &contact);
 };
 
 //------------------------------------------------------------------------------

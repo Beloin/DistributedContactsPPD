@@ -24,7 +24,7 @@ public:
 
   bool connect();
 
-  bool removeContact(std::string name);
+  bool removeContact(std::string &name);
   const bool createContact(std::string name, std::string number);
 
   bool refresh();
